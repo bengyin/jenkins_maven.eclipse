@@ -1,4 +1,4 @@
-package com.sddevops.junit_maven.eclipse;
+package com.sddevops.jenkins_maven.eclipse;
 
 import java.util.Comparator;
 import java.util.Objects;

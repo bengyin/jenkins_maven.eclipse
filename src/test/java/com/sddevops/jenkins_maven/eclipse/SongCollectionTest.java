@@ -1,4 +1,4 @@
-package com.sddevops.junit_maven.eclipse;
+package com.sddevops.jenkins_maven.eclipse;
 
 import static org.junit.jupiter.api.Assertions.*;
 

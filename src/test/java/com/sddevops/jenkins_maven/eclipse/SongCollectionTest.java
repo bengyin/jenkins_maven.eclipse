@@ -1,29 +1,29 @@
-package com.sddevops.jenkins_maven.eclipse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.sddevops.junit_maven.eclipse;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SongCollectionTest {
+
 	private SongCollection sc;
 	private Song s1;
 	private Song s2;
 	private Song s3;
 	private Song s4;
 	private final int SONG_COLLECTION_SIZE = 4;
+	private SongCollection sc_with_size;
+	private SongCollection sc_with_size_1;
 
-	private SongCollection scByTitle;
-	private SongCollection scBySongLength;
-	
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		// Arrange
 		sc = new SongCollection();
 		s1 = new Song("001", "good 4 u", "Olivia Rodrigo", 3.59);
 		s2 = new Song("002", "Peaches", "Justin Bieber", 3.18);
@@ -33,83 +33,102 @@ class SongCollectionTest {
 		sc.addSong(s2);
 		sc.addSong(s3);
 		sc.addSong(s4);
-		// System.out.println("sc: "+sc.getSongs());
-		
-		scByTitle = new SongCollection();
-		scByTitle.addSong(s3);
-		scByTitle.addSong(s2);
-		scByTitle.addSong(s4);
-		scByTitle.addSong(s1);
-		// ArrayList<Song> scByTitle;
-		// System.out.println("scByTitle: "+scByTitle.getSongs());
-		
-		scBySongLength = new SongCollection();
-		scBySongLength.addSong(s1);
-		scBySongLength.addSong(s2);
-		scBySongLength.addSong(s4);
-		scBySongLength.addSong(s3);
-		// ArrayList<Song> scBySongLength;
-		// System.out.println("scBySongLength: "+scBySongLength.getSongs());
-		
+		sc_with_size = new SongCollection(5);
+		sc_with_size_1 = new SongCollection(1);
+
 	}
 
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@AfterEach
 	void tearDown() throws Exception {
+		sc = null;
+		sc_with_size = null;
+		sc_with_size_1 = null;
+
 	}
 
+	/**
+	 * Test method for
+	 * {@link com.sddevops.junit_maven.eclipse.SongCollection#getSongs()}.
+	 */
 	@Test
 	void testGetSongs() {
-		//Act
-		List<Song> testSc=sc.getSongs();
-		//Assert that Song Collection is equals to Song Collection Size 4
-		assertEquals(testSc.size(),SONG_COLLECTION_SIZE);
+		List<Song> testSc = sc.getSongs();
+		assertEquals(testSc.size(), SONG_COLLECTION_SIZE);
 	}
 
+	/**
+	 * Test method for
+	 * {@link com.sddevops.junit_maven.eclipse.SongCollection#addSong(com.sddevops.junit_maven.eclipse.Song)}.
+	 */
 	@Test
 	void testAddSong() {
-		List<Song> testSc=sc.getSongs();
-		//Assert that Song Collection is equals to Song Collection Size 4
-		assertEquals(testSc.size(),SONG_COLLECTION_SIZE);
-		//Act
+		List<Song> testSc = sc.getSongs();
+		// Assert that Song Collection is equals to Song Collection Size : 4
+		assertEquals(testSc.size(), SONG_COLLECTION_SIZE);
+		// Act
 		sc.addSong(s1);
-		//Assert that Song Collection is equals to Song Collection Size 4 + 1
-		assertEquals(testSc.size(),SONG_COLLECTION_SIZE+1);
+		// Assert that Song Collection is equals to Song Collection Size + 1 : 5
+		assertEquals(testSc.size(), SONG_COLLECTION_SIZE + 1);
+
+		sc_with_size_1.addSong(s1);
+		sc_with_size_1.addSong(s2);
+		sc_with_size_1.addSong(s3);
+		assertEquals(sc_with_size_1.getSongs().size(), 1);
 
 	}
 
+	/**
+	 * Test method for
+	 * {@link com.sddevops.junit_maven.eclipse.SongCollection#sortSongsByTitle()}.
+	 */
 	@Test
 	void testSortSongsByTitle() {
-		//fail("Not yet implemented");
-		//Act
-		ArrayList<Song> testSc = sc.sortSongsByTitle();
-		//Assert
-		assertEquals(testSc,scByTitle.getSongs());
+		List<Song> sortedSongList = sc.sortSongsByTitle();
+		assertEquals(sortedSongList.get(0).getTitle(), "MONTERO");
+		assertEquals(sortedSongList.get(1).getTitle(), "Peaches");
+		assertEquals(sortedSongList.get(2).getTitle(), "bad guy");
+		assertEquals(sortedSongList.get(3).getTitle(), "good 4 u");
 
 	}
 
+	/**
+	 * Test method for
+	 * {@link com.sddevops.junit_maven.eclipse.SongCollection#sortSongsBySongLength()}.
+	 */
 	@Test
 	void testSortSongsBySongLength() {
-		//fail("Not yet implemented");
-		//Act
-		ArrayList<Song> testSc = sc.sortSongsBySongLength();
-		//Assert
-		assertEquals(testSc,scBySongLength.getSongs());
+		List<Song> sortedSongByLengthList = sc.sortSongsBySongLength();
+		assertEquals(sortedSongByLengthList.get(0).getSongLength(), 3.59);
+		assertEquals(sortedSongByLengthList.get(1).getSongLength(), 3.18);
+		assertEquals(sortedSongByLengthList.get(2).getSongLength(), 3.14);
+		assertEquals(sortedSongByLengthList.get(3).getSongLength(), 2.3);
+
 	}
 
+	/**
+	 * Test method for
+	 * {@link com.sddevops.junit_maven.eclipse.SongCollection#findSongsById(java.lang.String)}.
+	 */
 	@Test
 	void testFindSongsById() {
-		//Act
-		Song testSc=sc.findSongsById("002");
-		//Assert
-		assertEquals(testSc.getId(),"002");
+		Song song = sc.findSongsById("004");
+		assertEquals(song.getArtiste(), "billie eilish");
+		assertNull(sc.findSongsById("doesnt exist"));
+
 	}
 
+	/**
+	 * Test method for
+	 * {@link com.sddevops.junit_maven.eclipse.SongCollection#findSongByTitle(java.lang.String)}.
+	 */
 	@Test
 	void testFindSongByTitle() {
-		//Act
-		Song testSc=sc.findSongByTitle("bad guy");
-		//Assert
-		assertEquals(testSc.getTitle(),"bad guy");
-	}
+		Song song = sc.findSongByTitle("MONTERO");
+		assertEquals(song.getArtiste(), "Lil Nas");
+		assertNull(sc.findSongByTitle("doesnt exist"));
 
+	}
 }

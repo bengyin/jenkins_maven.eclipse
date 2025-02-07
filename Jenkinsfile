@@ -7,19 +7,19 @@ pipeline{
 	stages{
 		stage("clean"){
 			steps{
-				echo "Start Clean"
+				echo "Start Clean again"
 				bat "mvn clean"
 			}
 		}
 		stage("test"){
 			steps{
-				echo "Start Test"
+				echo "Start Test again"
 				bat "mvn test"
 			}
 		}
 		stage("build"){
 			steps{
-				echo "Start build"
+				echo "Start build again"
 				bat "mvn install -DskipTests"
 			}
 		}

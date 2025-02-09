@@ -3,7 +3,6 @@ pipeline{
 	tools { 
         maven 'Maven' 
         jdk 'Java JDK 17'
-        sonarQube 'sonarqube_scanner'
     }
 	stages{
 		stage("clean"){
@@ -22,14 +21,6 @@ pipeline{
 			steps{
 				echo "Start build"
 				bat "mvn install -DskipTests"
-			}
-		}
-		stage("scan"){
-			steps{
-				echo "Start scan"
-                withSonarQubeEnv('SonarQube') {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }
 			}
 		}
 	}

@@ -23,12 +23,14 @@ pipeline{
 				echo "Start build"
 				bat "mvn install -DskipTests"
 			}
+		}
 		stage("scan"){
 			steps{
-        		withSonarQubeEnv('SonarQube Scanner') {
-          		sh 'sonar-scanner'
-          		}
-          	}
+				echo "Start scan"
+                withSonarQubeEnv('SonarQube') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+			}
 		}
 	}
 } 

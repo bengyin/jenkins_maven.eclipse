@@ -23,5 +23,11 @@ pipeline{
 				bat "mvn install -DskipTests"
 			}
 		}
+		stage("container"){
+			steps{
+				echo "Start container"
+                sh 'docker container run hello-world'
+			}
+		}
 	}
 } 

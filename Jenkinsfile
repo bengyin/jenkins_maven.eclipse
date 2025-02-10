@@ -23,10 +23,12 @@ pipeline{
 				bat "mvn install -DskipTests"
 			}
 		}
-		stage('SonarQube analysis') {
-			def scannerHome = tool 'sonarqube_scanner';
-			withSonarQubeEnv('SonarQube') {
-				bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
+		stage("SonarQube analysis") {
+			def scannerHome = tool 'sonarqube_scanner'
+			steps{
+				withSonarQubeEnv('SonarQube') {
+					bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
+				}
 			}
 		}
 	}

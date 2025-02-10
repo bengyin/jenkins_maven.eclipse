@@ -36,7 +36,7 @@ pipeline{
 			steps{
 				echo "Start SonarQube"
 				withSonarQubeEnv('SonarQube') {
-					bat "${env.SONAR_RUNNER_HOME}\\bin\\sonar-scanner.bat -Dsonar.projectKey=maven-project-jenkins-lab -Dsonar.java.binaries=target/classes"
+					bat "${env.SONAR_RUNNER_HOME}\\bin\\sonar-scanner.bat -Dsonar.projectKey=jenkins_maven.eclipse -Dsonar.java.binaries=target/classes"
 				}
 			}
 		}

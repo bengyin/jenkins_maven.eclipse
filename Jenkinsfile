@@ -26,6 +26,12 @@ pipeline{
 				bat "mvn install -DskipTests"
 			}
 		}
+		stage("Docker build"){
+			steps{
+				echo "Start Docker build"
+				bat "docker build -t bengyin/jenkins_maven.eclipse:latest ."
+			}
+		}
 		stage("SonarQube analysis") {
 			steps{
 				echo "Start SonarQube"

@@ -2,7 +2,7 @@ pipeline{
 	agent any
 	tools { 
         maven 'Maven' 
-        jdk 'Java JDK 17' 
+        jdk 'Java JDK 17'
     }
 	stages{
 		stage("clean"){
@@ -23,6 +23,11 @@ pipeline{
 				bat "mvn install -DskipTests"
 			}
 		}
+		stage('SonarQube analysis') {
+		def scannerHome = tool 'sonarqube_scanner';
+		withSonarQubeEnv('SonarQube') {
+			bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
+       }
 	}
 } 
 

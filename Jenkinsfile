@@ -29,7 +29,7 @@ pipeline{
 		stage("Docker build"){
 			steps{
 				echo "Start Docker build"
-				/* bat "docker build -t bengyin/jenkins_maven.eclipse:latest ." */
+				bat "docker build -t bengyin/jenkins_maven.eclipse:latest ."
 			}
 		}
 		stage("SonarQube analysis") {

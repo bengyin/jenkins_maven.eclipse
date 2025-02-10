@@ -26,7 +26,7 @@ pipeline{
 		stage("SonarQube analysis") {
 			steps{
 				withSonarQubeEnv('SonarQube') {
-					bat "sonar-scanner"
+					bat "C:\Users\bengy\SonarQube\sonar-scanner-cli-7.0.1.4817\sonar-scanner-7.0.1.4817\bin\sonar-scanner.bat"
 				}
 			}
 		}

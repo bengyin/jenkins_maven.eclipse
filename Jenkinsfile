@@ -3,7 +3,6 @@ pipeline{
 	tools { 
         maven 'Maven' 
         jdk 'Java JDK 17'
-        sonarqube 'sonarqube_scanner'
     }
 	stages{
 		stage("clean"){
@@ -26,7 +25,7 @@ pipeline{
 		}
 		stage("SonarQube analysis") {
 			steps{
-				withSonarQubeEnv('SonarQube') {
+				withSonarQubeEnv('sonarqube_scanner') {
 					bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
 				}
 			}

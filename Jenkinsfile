@@ -42,7 +42,7 @@ pipeline{
 		} */
 			steps {
 				script {
-					def scannerHome = tool 'sonarqube-scanner'
+/*					def scannerHome = tool 'sonarqube_scanner' */
 
                     // Prepare SonarQube environment
 					def sonarProperties = """

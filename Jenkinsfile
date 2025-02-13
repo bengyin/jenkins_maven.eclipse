@@ -42,7 +42,7 @@ pipeline{
 		} */
 			steps {
 				script {
-/*					def scannerHome = tool 'sonarqube_scanner' */
+					def scannerHome = tool 'sonarqube_scanner'
 
                     // Prepare SonarQube environment
 					def sonarProperties = """
@@ -67,7 +67,7 @@ pipeline{
 
                     // Run SonarQube scan using the properties file
                     withSonarQubeEnv('SonarQube') {
-                    	bat "${env.SONAR_RUNNER_HOME}\\bin\\sonar-scanner.bat -Dproject.settings=sonar-project.properties"
+                    	bat "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
                 	}
                 }
             }
